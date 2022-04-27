@@ -1,0 +1,35 @@
+services:
+        mysql:
+            image:
+                mysql:latest
+            container_name: mysql_db
+            restart: always
+            environment:
+                MYSQL_ROOT_PASSWORD: qwer
+            volumes:
+                - $PWD/share_folder:/var/lib/mysql
+            ports:
+                - "3306:3306"
+
+        python:          
+            image:
+                con:latest
+            container_name: python_control
+            restart: always
+            volumes:
+                - $PWD/share_folder:/var/lib/python
+            tty: true
+        
+        nginx:
+            image:
+                nginx:latest
+            container_name: nginx_web
+            restart: always
+            volumes:
+                - $PWD/share_folder:/var/lib/nginx
+            ports:
+                - "80:80"
+
+volumes:
+    share_folder:
+
